@@ -74,6 +74,26 @@
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Andrejs Liepiņš";
+            /
+            // groupBoxOlimov
+            // 
+            this.groupBoxOlimov.Controls.Add(this.buttonOlimov);
+            this.groupBoxOlimov.Location = new System.Drawing.Point(12, 90);
+            this.groupBoxOlimov.Name = "groupBoxOlimov";
+            this.groupBoxOlimov.Size = new System.Drawing.Size(200, 53);
+            this.groupBoxOlimov.TabIndex = 4;
+            this.groupBoxOlimov.TabStop = false;
+            this.groupBoxOlimov.Text = "Asror Olimov";
+            // 
+            // buttonOlimov
+            // 
+            this.buttonOlimov.Location = new System.Drawing.Point(6, 19);
+            this.buttonOlimov.Name = "buttonOlimov";
+            this.buttonOlimov.Size = new System.Drawing.Size(75, 23);
+            this.buttonOlimov.TabIndex = 0;
+            this.buttonOlimov.Text = "y=tan(x)";
+            this.buttonOlimov.UseVisualStyleBackColor = true;
+            this.buttonOlimov.Click += new System.EventHandler(this.buttonOlimov_Click);
             // 
             // Form1
             // 
