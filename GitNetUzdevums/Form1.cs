@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace WindowsFormsApplication_15
@@ -19,92 +13,53 @@ namespace WindowsFormsApplication_15
 
         private void button1_Click(object sender, EventArgs e)
         {
-            double m = 30; //scale
-            int xc = pictureBox1.Width / 2;   // center coordinates
-            int yc = pictureBox1.Height / 2;
-            int xe, ye;     // point "screen" coordinates
-            double x, y;   // point "math" coordinates
-            double step = 0.005;    // step
-            Graphics G = pictureBox1.CreateGraphics();
-            G.Clear(System.Drawing.Color.White);
-            Pen myPen = new Pen(Color.Silver);
-            G.DrawLine(myPen, 10, yc, 2 * xc - 10, yc);   // axes
-            G.DrawLine(myPen, xc, 10, xc, 2 * yc - 10);
-            myPen = new Pen(Color.Black);
-            x = -Math.PI;
-            // function graph design loop
-            while (x < Math.PI)
-            {
-                try   // if the function does not exist at any point 
-                {
-                    y = 1/Math.Sin(x);   // Function formula!!!
-                    xe = (int)(xc + m * x);
-                    ye = (int)(yc - m * y);
-                    G.DrawEllipse(myPen, xe, ye, 1, 1);
-                }
-                catch { }
-                x += step;
-            }
+            DrawGraph(x => 1 / Math.Sin(x), Color.Black);
         }
-
 
         private void button2_Click(object sender, EventArgs e)
         {
-            double m = 30; //scale
-            int xc = pictureBox1.Width / 2;   // center coordinates
-            int yc = pictureBox1.Height / 2;
-            int xe, ye;     // point "screen" coordinates
-            double x, y;   // point "math" coordinates
-            double step = 0.005;    // step
-            Graphics G = pictureBox1.CreateGraphics();
-            G.Clear(System.Drawing.Color.White);
-            Pen myPen = new Pen(Color.Silver);
-            G.DrawLine(myPen, 10, yc, 2 * xc - 10, yc);   // axes
-            G.DrawLine(myPen, xc, 10, xc, 2 * yc - 10);
-            myPen = new Pen(Color.Black);
-            x = -Math.PI;
-            // function graph design loop
-            while (x < Math.PI)
-            {
-                try   // if the function does not exist at any point 
-                {
-                    y = x * x; // Function formula!!!
-                    xe = (int)(xc + m * x);
-                    ye = (int)(yc - m * y);
-                    G.DrawEllipse(myPen, xe, ye, 1, 1);
-                }
-                catch { }
-                x += step;
-            }
+            DrawGraph(x => x * x, Color.Black);
         }
 
-        // ===== Added by Olimov =====
-        private void buttonOlimov_Click(object sender, EventArgs e)
+        private void button3_Click(object sender, EventArgs e)
         {
-            double m = 30; //scale
-            int xc = pictureBox1.Width / 2;   // center coordinates
+            DrawGraph(x => Math.Tan(x), Color.Blue);
+        }
+
+        private void groupBox2_Enter(object sender, EventArgs e)
+        {
+        }
+
+        private void DrawGraph(Func<double, double> function, Color color)
+        {
+            double m = 30;
+            int xc = pictureBox1.Width / 2;
             int yc = pictureBox1.Height / 2;
-            int xe, ye;     // point "screen" coordinates
-            double x, y;   // point "math" coordinates
-            double step = 0.005;    // step
+            int xe, ye;
+            double x, y;
+            double step = 0.005;
+
             Graphics G = pictureBox1.CreateGraphics();
-            G.Clear(System.Drawing.Color.White);
+            G.Clear(Color.White);
+
             Pen myPen = new Pen(Color.Silver);
-            G.DrawLine(myPen, 10, yc, 2 * xc - 10, yc);   // axes
+            G.DrawLine(myPen, 10, yc, 2 * xc - 10, yc);
             G.DrawLine(myPen, xc, 10, xc, 2 * yc - 10);
-            myPen = new Pen(Color.Blue);
+
+            myPen = new Pen(color);
             x = -Math.PI;
-            // function graph design loop
+
             while (x < Math.PI)
             {
-                try   // if the function does not exist at any point 
+                try
                 {
-                    y = Math.Tan(x);   // Function formula!!!
+                    y = function(x);
                     xe = (int)(xc + m * x);
                     ye = (int)(yc - m * y);
                     G.DrawEllipse(myPen, xe, ye, 1, 1);
                 }
                 catch { }
+
                 x += step;
             }
         }
